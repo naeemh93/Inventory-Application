@@ -1,0 +1,24 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "scanned": {
+        "type": "boolean"
+      },
+      "occupied": {
+        "type": "boolean"
+      },
+      "detected_barcodes": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": ["name", "scanned", "occupied", "detected_barcodes"]
+  }
+}

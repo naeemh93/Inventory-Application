@@ -1,0 +1,17 @@
+<!-- app/views/locations/new_file_upload.html.erb -->
+<div class="container mt-5">
+  <h1 class="mb-4">Upload a New CSV File</h1>
+
+  <%= form_with(model: @inventory_storage, url: upload_csv_location_path(@inventory_storage), method: :post, local: true, enctype: "multipart/form-data", class: "needs-validation", novalidate: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :customer_file, "Select CSV File", class: "form-label" %>
+      <%= form.file_field :customer_file, accept: 'text/csv', class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Upload CSV", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to locations storage', locations_path, class: 'btn btn-secondary mt-3' %>
+</div>

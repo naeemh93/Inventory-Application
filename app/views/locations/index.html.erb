@@ -1,0 +1,31 @@
+<!-- app/views/locations/index.html.erb -->
+<div class="container mt-5">
+  <h1 class="mb-4">Inventory Storage Application</h1>
+
+  <table class="table">
+    <thead class="table-dark">
+    <tr>
+      <th>Title</th>
+      <th>CSV File</th>
+      <th>Report Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @inventory_storages.each do |inventory_storage| %>
+      <tr>
+        <td><%= inventory_storage.title %></td>
+        <td>
+          <% if inventory_storage.customer_file.attached? %>
+            <%= inventory_storage.customer_file.filename %>
+          <% else %>
+            <%= link_to 'Upload CSV', new_file_location_path(inventory_storage), method: :get, class: 'btn btn-primary btn-sm' %>
+          <% end %>
+        </td>
+        <td>
+          <%= report_state(inventory_storage) %> <!-- Use the helper here -->
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
