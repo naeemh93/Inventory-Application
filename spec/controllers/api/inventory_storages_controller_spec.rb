@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::InventoryStoragesController, type: :request do
@@ -13,9 +15,9 @@ RSpec.describe Api::InventoryStoragesController, type: :request do
       end
 
       it 'creates a new inventory storage and attaches file' do
-        expect {
+        expect do
           post '/api/inventory_storages', params: valid_params
-        }.to change(ActiveStorage::Attachment, :count).by(1).and change(InventoryStorage, :count).by(1)
+        end.to change(ActiveStorage::Attachment, :count).by(1).and change(InventoryStorage, :count).by(1)
         expect(response).to have_http_status(:ok)
       end
     end
@@ -24,7 +26,7 @@ RSpec.describe Api::InventoryStoragesController, type: :request do
       it 'returns an error for missing or invalid file' do
         post '/api/inventory_storages', params: {}
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)).to include("error" => "Invalid or missing JSON file")
+        expect(JSON.parse(response.body)).to include('error' => 'Invalid or missing JSON file')
       end
     end
 
@@ -36,7 +38,7 @@ RSpec.describe Api::InventoryStoragesController, type: :request do
       it 'returns an error for invalid JSON file contents according to schema' do
         post '/api/inventory_storages', params: invalid_params
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)).to include("error" => "Invalid JSON file contents according to schema")
+        expect(JSON.parse(response.body)).to include('error' => 'Invalid JSON file contents according to schema')
       end
     end
 

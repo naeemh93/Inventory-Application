@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories/comparison_reports.rb
 include ActionDispatch::TestProcess
 

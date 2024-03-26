@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LocationHelper
   def report_state(inventory_storage)
     return '-' unless inventory_storage.customer_file.attached?
@@ -9,11 +11,17 @@ module LocationHelper
 
     # Check the status of the comparison report
     case comparison_report.status
-    when "failed"
+    when 'failed'
       'Report Generation Failed'
     else
 
-      comparison_report.report_file.attached? ? link_to('Download Report', rails_blob_path(comparison_report.report_file, disposition: "attachment")) : 'Report is getting ready'
+      if comparison_report.report_file.attached?
+        link_to('Download Report',
+                rails_blob_path(comparison_report.report_file,
+                                disposition: 'attachment'))
+      else
+        'Report is getting ready'
+      end
     end
   end
 end

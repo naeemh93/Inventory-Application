@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class InventoryStoragesController < ApplicationController
     skip_before_action :verify_authenticity_token
@@ -17,7 +19,6 @@ module Api
       end
     end
 
-
     private
 
     def validate_json_file
@@ -27,8 +28,7 @@ module Api
         render json: { error: 'Invalid or missing JSON file' }, status: :unprocessable_entity
         return
       end
-      @valid_file = FileValidationService.validate_json(file: file, schema_path: Rails.root.join(schema_path))
+      @valid_file = FileValidationService.validate_json(file:, schema_path: Rails.root.join(schema_path))
     end
   end
-
 end

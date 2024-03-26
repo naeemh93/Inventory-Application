@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   include CsvFileValidation
   skip_before_action :verify_authenticity_token
@@ -19,6 +21,4 @@ class LocationsController < ApplicationController
       format.json { render json: { notice: 'CSV uploaded and processed successfully.' }, status: :ok }
     end
   end
-
-
 end

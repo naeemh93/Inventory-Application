@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require 'csv'
 require 'json-schema'
 
 class FileValidationService
-  CSV_REQUIRED_HEADERS = [:location, :item].freeze
+  CSV_REQUIRED_HEADERS = %i[location item].freeze
 
   # Validates CSV file
   def self.validate_csv(file)
     content = file.read
     csv = CSV.parse(content, headers: true, header_converters: :symbol)
-    #todo: we can also validate check for the location name format if needed.
+    # TODO: we can also validate check for the location name format if needed.
     CSV_REQUIRED_HEADERS.all? { |header| csv.headers.include?(header) }
-  rescue
+  rescue StandardError
     false
   end
 

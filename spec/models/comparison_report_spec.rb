@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/models/comparison_report_spec.rb
 require 'rails_helper'
 

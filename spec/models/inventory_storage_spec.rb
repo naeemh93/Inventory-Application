@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/models/inventory_storage_spec.rb
 require 'rails_helper'
 
@@ -9,7 +11,8 @@ RSpec.describe InventoryStorage, type: :model do
 
     context 'when robot_file is not JSON' do
       before do
-        storage.robot_file.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_report.pdf')), filename: 'test_report.pdf', content_type: 'application/pdf')
+        storage.robot_file.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_report.pdf')),
+                                  filename: 'test_report.pdf', content_type: 'application/pdf')
       end
 
       it 'is not valid' do
@@ -20,7 +23,8 @@ RSpec.describe InventoryStorage, type: :model do
 
     context 'when customer_file is not JSON' do
       before do
-        storage.customer_file.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_report.pdf')), filename: 'test_report.pdf', content_type: 'application/pdf')
+        storage.customer_file.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_report.pdf')),
+                                     filename: 'test_report.pdf', content_type: 'application/pdf')
       end
 
       it 'is not valid' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Refactored InventoryServiceJob class demonstrating best practices
 class InventoryServiceJob < ApplicationJob
   # Perform the job with error handling
@@ -14,10 +16,10 @@ class InventoryServiceJob < ApplicationJob
     ensure_comparison_report_exists(inventory_storage)
 
     report_data = fetch_comparison_report_data(inventory_storage)
-    if report_data.present?
-      csv_content = generate_csv_from(report_data)
-      attach_report_to(inventory_storage, csv_content)
-    end
+    return unless report_data.present?
+
+    csv_content = generate_csv_from(report_data)
+    attach_report_to(inventory_storage, csv_content)
   end
 
   # Ensure a comparison report exists or create one
@@ -59,7 +61,7 @@ class InventoryServiceJob < ApplicationJob
   def attach_csv_to_storage(inventory_storage, csv_content, filename)
     inventory_storage.comparison_report.report_file.attach(
       io: StringIO.new(csv_content),
-      filename: filename,
+      filename:,
       content_type: 'text/csv'
     )
   end
@@ -67,6 +69,6 @@ class InventoryServiceJob < ApplicationJob
   # Update the status of the comparison report
   def update_report_status(inventory_storage, status)
     ensure_comparison_report_exists(inventory_storage) unless status == 'failed'
-    inventory_storage.comparison_report.update(status: status)
+    inventory_storage.comparison_report.update(status:)
   end
 end
