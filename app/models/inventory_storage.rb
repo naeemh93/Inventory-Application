@@ -17,8 +17,8 @@ class InventoryStorage < ApplicationRecord
   end
 
   def customer_file_type
-    return unless customer_file.attached? && !customer_file.content_type.in?(%w[application/json])
+    return unless customer_file.attached? && !customer_file.content_type.in?(%w[text/csv])
 
-    errors.add(:customer_file, 'must be a JSON file')
+    errors.add(:customer_file, 'must be a CSV file')
   end
 end

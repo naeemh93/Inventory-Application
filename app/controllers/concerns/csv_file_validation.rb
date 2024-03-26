@@ -10,7 +10,7 @@ module CsvFileValidation
   private
 
   def validate_csv_file
-    file = params[:inventory_storage][:customer_file]
+    file = params.dig(:inventory_storage, :customer_file)
     unless file.present?
       respond_with_error('No file was uploaded.')
       return false
