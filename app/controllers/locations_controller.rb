@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
+  include CsvFileValidation
   skip_before_action :verify_authenticity_token
-  before_action :validate_csv_file, only: [:upload_customer_csv]
 
   def index
     @inventory_storages = InventoryStorage.all
@@ -20,19 +20,5 @@ class LocationsController < ApplicationController
     end
   end
 
-  private
-
-  def validate_csv_file
-    file =params[:inventory_storage][:customer_file]
-    if file.present? && File.extname(file.original_filename).downcase == '.csv' && FileValidationService.validate_csv(file)
-      true
-    else
-      respond_to do |format|
-        format.html { redirect_to new_file_location_path, notice: 'Invalid or missing CSV file, or file does not meet the required format.' }
-        format.json { render json: { error: 'Invalid or missing CSV file, or file does not meet the required format' }, status: :unprocessable_entity }
-      end
-      false
-    end
-  end
 
 end

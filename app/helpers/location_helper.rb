@@ -10,10 +10,10 @@ module LocationHelper
     # Check the status of the comparison report
     case comparison_report.status
     when "failed"
-      'Issue with comparison file'
+      'Report Generation Failed'
     else
-      # If report file is attached, provide a link; otherwise, indicate readiness
-      comparison_report.report_file.attached? ? link_to('View Report', rails_blob_path(comparison_report.report_file, disposition: "attachment")) : 'File is getting ready'
+
+      comparison_report.report_file.attached? ? link_to('Download Report', rails_blob_path(comparison_report.report_file, disposition: "attachment")) : 'Report is getting ready'
     end
   end
 end

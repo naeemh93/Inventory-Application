@@ -1,5 +1,4 @@
 require 'csv'
-require 'json'
 require 'json-schema'
 
 class FileValidationService
@@ -9,8 +8,7 @@ class FileValidationService
   def self.validate_csv(file)
     content = file.read
     csv = CSV.parse(content, headers: true, header_converters: :symbol)
-
-    # Check if all required headers are present
+    #todo: we can also validate check for the location name format if needed.
     CSV_REQUIRED_HEADERS.all? { |header| csv.headers.include?(header) }
   rescue
     false
