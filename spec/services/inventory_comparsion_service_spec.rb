@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'json'
 require 'csv'
 RSpec.describe InventoryComparisonService do
-  # Mocking the InventoryStorage to return specific file contents
   let(:inventory_storage) { instance_double('InventoryStorage') }
   let(:robot_file_content) do
     # Example JSON content

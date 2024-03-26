@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# spec/factories/comparison_reports.rb
-include ActionDispatch::TestProcess
-
 FactoryBot.define do
   factory :comparison_report do
     association :inventory_storage

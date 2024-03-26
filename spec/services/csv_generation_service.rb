@@ -20,7 +20,8 @@ RSpec.describe CsvGenerationService do
           { name: 'Location B', scanned: false, occupied: 2, expected_barcodes: 4, detected_barcodes: 3,
             comparison_result: 'Mismatch' }
         ]
-        expected_csv = "Location Name,Scanned,Occupied,Expected Barcodes,Detected Barcodes,Comparison Result\nLocation A,true,1,2,2,Match\nLocation B,false,2,4,3,Mismatch\n"
+        expected_csv = "Location Name,Scanned,Occupied,Expected Barcodes,Detected Barcodes,Comparison Result\n
+                   Location A,true,1,2,2,Match\nLocation B,false,2,4,3,Mismatch\n"
         expect(described_class.generate_csv_content(data)).to eq(expected_csv)
       end
     end

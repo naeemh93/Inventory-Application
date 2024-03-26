@@ -21,6 +21,20 @@ module Api
 
     private
 
+    def render_invalid_file_error
+      render json: { error: 'Invalid JSON file contents according to schema' }, status: :unprocessable_entity
+    end
+
+    def create_inventory_storage
+      @inventory_storage = InventoryStorage.new(title: formatted_title)
+      @inventory_storage.robot_file.attach(params[:file])
+      @inventory_storage.save
+    end
+
+    def formatted_title
+      "#{params[:file].original_filename}_#{Time.now}"
+    end
+
     def validate_json_file
       file = params[:file]
       schema_path = 'app/schemas/robot_schema.json'
