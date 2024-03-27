@@ -1,0 +1,26 @@
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
+
+Layout/LineLength:
+  Max: 130
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'config/**/*.rb'
+
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
+
